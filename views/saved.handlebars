@@ -1,0 +1,43 @@
+<!-- ======================================= Nav ======================================= -->
+{{!-- <div class="container"> --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light main">
+    <img src="/css/original.gif" class="qr" alt="">
+    <a href="/" class="header" style="text-decoration:none">IGN Scraper </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a href="/" class="btn btn-light btn-sm" id="homePgBtn">Home</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ======================================= Body ======================================= -->
+{{!-- <section class="section" id="page"> --}}
+<div class="container" id="page" style="margin-top:100px">
+    <div class="row">
+        {{#each news}}
+        <div class="list-group col-lg-5 col-12 m-auto" id="gameCard">
+            <a href="{{this.link}}" id="ignLink">
+                <h5>{{this.title}}</h5>
+            </a>
+            <img class="thumb" src="{{this.img}}">
+            <br><br><br><br><br>
+            <button class="unSaveBtn btn-success" data-ObjectId="{{this._id}}" data-State="{{this.saved}}">
+                <i class="fas fa-trash-restore-alt"></i>
+            </button>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<!-- ======================================= footer ======================================= -->
+<footer>
+    <hr>
+    <span>Copyright &copy; 2019 Isaac Wu</span>
+    <span> · Powered by IGN.com</sp>
+</footer>
