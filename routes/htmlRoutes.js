@@ -40,7 +40,7 @@ module.exports = function (app) {
     app.delete("/clear", (req, res) => {
         db.New.remove({})
             .then((cleared) => {
-                console.log("It's been cleared")
+                res.send("sent")
             })
             .catch((err) => {
                 console.log(err)
@@ -68,6 +68,7 @@ module.exports = function (app) {
 
                             db.New.create(result)
                                 .then((dbNew) => {
+                                    res.send("sent")
                                     // console.log(dbNew)
                                 })
                                 .catch((err) => {

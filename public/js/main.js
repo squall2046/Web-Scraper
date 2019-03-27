@@ -28,21 +28,6 @@ $("#scrapeBtn").on("click", () => {
         .then(function (data) {
             console.log("test")
             window.location.reload();
-
-            // window.location = "/"
-            // ==== not work
-
-            // window.location.reload();
-            // ==== not work
-
-            // $.ajax({
-            //     method: "GET",
-            //     url: "/"
-            // })
-            //     .then(function (data) {
-            //     });
-            // ==== not work
-
         });
 });
 
