@@ -11,34 +11,22 @@ const db = require("../models");
 // =============================================================
 module.exports = function (app) {
 
-    // =============== get news from mongodb news collection ===============
-    app.get("/", function (req, res) {
-        db.New.find({ saved: false }).sort({ date: -1 })
+    // =============== get unsaved data from mongodb news-collection ===============
+    app.get("/", (req, res) => {
+        db.New.find({ saved: false })
             .then((dbNew) => {
                 let hbsObject = {
                     news: dbNew
                 };
                 res.render("index", hbsObject);
                 // console.log(hbsObject)
-                console.log(hbsObject.news)
-            });
-    });
-
-    // =============== get saved from mongodb news collection as well ===============
-    app.get("/saved", function (req, res) {
-        db.New.find({ saved: true }).sort({ date: -1 })
-            .then((dbSaved) => {
-                let hbsObject = {
-                    news: dbSaved
-                };
-                res.render("saved", hbsObject);
-                console.log(hbsObject)
-            });
+                // console.log(hbsObject.news)
+            })
     });
 
     // =============== click clear News button ===============
     app.delete("/clear", (req, res) => {
-        db.New.remove({})
+        db.New.deleteMany({ saved: false })
             .then((cleared) => {
                 res.send("sent")
             })
@@ -49,8 +37,20 @@ module.exports = function (app) {
 
     // =============== click Scrape News button ===============
     app.post("/scrape", (req, res) => {
-        db.New.remove({})
+        db.New.deleteMany({ saved: false })
             .then((cleared) => {
+
+                // After removed, all left news are saved,
+                // so loop all news we still have and push each of title to titleArray.
+                var titleArr = [];
+                db.New.find({})
+                    .then((dbNew) => {
+                        dbNew.forEach((eachNew) => {
+                            titleArr.push(eachNew.title);
+                        })
+                        console.log("==== titleArr:", titleArr)
+                    })
+
                 axios.get("http://www.ign.com/")
                     .then((response) => {
                         let $ = cheerio.load(response.data);
@@ -64,26 +64,25 @@ module.exports = function (app) {
                             result.img = $(this)
                                 .children("img")
                                 .attr("data-original");
-                            console.log(result)
+                            console.log("==== singleTitle:", result.title)
 
-                            db.New.create(result)
-                                .then((dbNew) => {
-                                    res.send("sent")
-                                    // console.log(dbNew)
-                                })
-                                .catch((err) => {
-                                    console.log(err)
-                                });
+                            // Prevent to create news in mongoDB duplicated
+                            if (titleArr.indexOf(result.title) === -1) {
+                                db.New.create(result)
+                                    .then((dbNew) => {
+                                        res.send("News created in mongoDB!!")
+                                    })
+                                    .catch((err) => {
+                                        console.log(err)
+                                    });
+                            }
                         })
                     });
-
-                // res.send("Scrape Complete !!")
             })
             .catch((err) => {
                 console.log(err)
             });
     })
-
 
     // =============== click save button to save news ===============
     app.put("/save/:id", (req, res) => {
@@ -94,6 +93,23 @@ module.exports = function (app) {
             .catch((err) => {
                 res.json(err);
             });
+    });
+
+    // ========================================================================
+    // ============================== saved page ==============================
+    // ========================================================================
+
+    // =============== get saved data from mongodb news-collection as well ===============
+    app.get("/saved", (req, res) => {
+        db.New.find({ saved: true }).sort({ date: -1 })
+            .populate("note")
+            .then((dbSaved) => {
+                let hbsObject = {
+                    saved: dbSaved
+                };
+                res.render("saved", hbsObject);
+                // console.log(hbsObject)
+            })
     });
 
     // =============== click remove button to un-save news ===============
@@ -107,17 +123,15 @@ module.exports = function (app) {
             });
     });
 
-
-
-
-
-
-    // =============== click note ===============
-    app.get("/new/:id", (req, res) => {
+    // =============== click note button on ===============
+    app.get("/note/:id", (req, res) => {
         db.New.findOne({ _id: req.params.id })
             .populate("note")
             .then(function (dbNew) {
-                res.json(dbNew);
+                let hbsObject = {
+                    notes: dbSaved
+                };
+                res.render("saved", hbsObject);
             })
             .catch((err) => {
                 res.json(err);

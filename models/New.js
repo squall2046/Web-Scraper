@@ -22,7 +22,7 @@ const NewSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    note: {
+    note_id: {
         type: Schema.Types.ObjectId,
         ref: "Note"
     }

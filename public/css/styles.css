@@ -18,7 +18,6 @@ body::after {
   z-index: -1;
 }
 
-
 #main{
   position: fixed;
   top: 0;
@@ -27,7 +26,7 @@ body::after {
   /* padding: .8% 8%; */
   z-index: 2;
   background-color: rgb(255, 255, 255, .95) !important;
-  box-shadow:  5px 5px 5px 5px rgba(0,0,0,0.5);
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
 
 }
 
@@ -60,8 +59,7 @@ body::after {
   border-radius: 50%;
 }
 
-/* row two */
-#savePgBtn, #homePgBtn, #scrapeBtn, #clearBtn {
+.navBtn{
   position: relative;
   float: right;
   right: 0px;
@@ -73,7 +71,6 @@ body::after {
 
 #savePgBtn, #clearBtn {
   margin-left: 10px;
-
 }
 
 .input, .select{
@@ -82,8 +79,68 @@ body::after {
   border-radius: 25px 0 0 25px;
 }
 
-/* ================= pop-up search window ================= */
-.searchStyle{
+/* ================= News ================= */
+.container {
+  padding: 1% 0;
+  height: auto;
+  margin-top: 70px !important;
+}
+
+#gameCard {
+  position: relative;
+  float: left;
+  padding: 20px;
+  margin-top: 30px !important;
+  width: 320px;
+  height: 240px;
+  font-family: 'Anton', sans-serif;
+  /* background-image: url('./true.jpg'); */
+  background-color: rgb(0, 0, 0, .9);
+  background-size: 100% auto;
+  box-shadow: 4px 4px 4px rgba(19, 19, 19, 0.7);
+  opacity: .95;
+  border-radius: 2px;
+}
+
+#ignLink {
+  color: rgb(230, 230, 230);
+  text-decoration: none;
+}
+
+#ignLink :hover {
+  color: rgb(59, 176, 211);
+}
+
+#thumb {
+  position: absolute;
+  width:auto;
+  height: 63%;
+  bottom: 20px;
+  border-radius: 10px;
+}
+
+.saveBtn, .unSaveBtn, .noteBtn{
+  position: absolute;
+  text-align: center;
+  bottom: 8%;
+  right: 5%;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border-radius: 50%;
+}
+.noteBtn {
+  bottom: 28%;
+}
+
+footer {
+  text-align: center;
+  padding-bottom: 15px;
+  margin-top: 50px;
+  background-color: rgb(255, 255, 255, .9)
+}
+/* 
+.popUp {
   position: fixed;
   float: left;
   width: 50%;
@@ -97,122 +154,83 @@ body::after {
   color: black;
   background: white;
   z-index: 10;
-}
+} */
 
-/* ================= game list body ================= */
-
-.container {
-  /* background-image: url('./smash.jpg'); */
-  /* background-color: rgba(255, 255, 255); */
-  padding: 1% 0;
-  height: auto;
-  margin-top: 70px !important;
-}
-
-.transition {
-  transition: .3s cubic-bezier(.3, 0, 0, 1.3);
-}
-.transition:hover {
-  padding: 1%;
-}
-
-#gameCard {
-  position: relative;
-  float: left;
-  padding: 20px;
-  margin-top: 30px !important;
-  width: 320px;
-  height: 240px;
-  font-family: 'Anton', sans-serif;
-  /* background-image: url('./true.jpg'); */
-  color: rgb(230, 230, 230);
-  background-color: #000000;
-  background-size: 100% auto;
-  box-shadow: 1px 10px 10px rgba(19, 19, 19, 0.9);
-  opacity: .95;
-  border-radius: 2px;
-}
-
-.thumb {
-  position: absolute;
-  width:auto;
-  height: 63%;
-  bottom: 20px;
-  border-radius: 10px;
-}
-
-.cardBtn{
-  position: absolute;
+.popUp {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
   text-align: center;
-  bottom: 5%;
-  left: 5%;
-  padding: 0 5% 0;
-  font-family: 'Anton', sans-serif;
-  color: black;
-  border-radius: 10px 10px 10px 0px;
-  box-shadow:  0px 0px 5px 0px rgba(3, 0, 41, 0.694);
+  z-index: 1;
 }
 
-.saveBtn, .unSaveBtn{
-  position: absolute;
-  text-align: center;
-  bottom: 8%;
-  right: 5%;
-  width: 35px;
-  height: 35px;
+.noteTable {
+  width: 60%;
+  height: 400px;
+  margin: 120px 0 80px;
   padding: 0;
-  border-radius: 50%;
-}
-
-footer {
-  text-align: center;
-  padding-bottom: 15px;
-  margin-top: 50px;
-  background-color: rgb(255, 255, 255, .9)
-}
-
-
-
-/* ================= card page ================= */
-
-#card-img {
-  width: 300px;
-  height: 300px;
+  border: 1px solid;
   border-radius: 10px;
-  margin-bottom: 20px;
+  border-color: white;
+  background-color: white;
+  color: black;
 }
 
-.apiImg, .apiDes {
+.noteHeader {
+  width: 100%;
+  height:30px;
+  border: 1px solid;
+  border-radius: 10px 10px 0 0;
+  border-color: white;
+  background-color: black;
+}
+
+.close {
   position: relative;
-  float: left;
-  margin: 20px;
-  background: rgb(255, 255, 255, .9);
+  right: 3px;
+  top: -10px;
+  padding: 10px;
+  color: red !important;
 }
 
-.comForm {
-  background-color: rgba(250, 230, 193, 0.3) !important;
+.noteList, .noteForm {
+  width: 45%;
+  height: 90%;
+  position: relative;
+  float: right;
+  padding: 0 20px 0 0;
+  margin: 0;
+  list-style-type: none;
+  overflow: scroll;
 }
 
-.comList, .comSend {
-  background: rgb(255, 255, 255, .9);
-  margin: 0 5%;
+.noteForm {
+  padding: 50px 0 0 20px;
+  margin: 0;
+  overflow: auto;
 }
 
+.noteList li {
+  padding: 2px;
+  margin-top: 15px;
+  border: 1px solid;
+  border-color: rgba(197, 197, 197);
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  overflow: auto;
 
-/* user page */
-.auth{
-  padding: 0% !important;
 }
 
-.signUp, .signIn{
-  text-align: center;
-  padding: 10% 20%;
+.noteList li:nth-child(even) {
+  background: rgba(197, 197, 197);
 }
 
-.signUp{
-  border-right: 1px solid;
-}
-
-.form-group{
-  text-align: left;
+.delNote {
+  position: relative;
+  float: right;
+  padding: 0 5px !important
 }

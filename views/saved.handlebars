@@ -1,6 +1,5 @@
 <!-- ======================================= Nav ======================================= -->
-{{!-- <div class="container"> --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light main">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="main">
     <img src="/css/original.gif" class="qr" alt="">
     <a href="/" class="header" style="text-decoration:none">IGN Scraper </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -10,23 +9,27 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a href="/" class="btn btn-light btn-sm" id="homePgBtn">Home</a>
+                <a href="/" class="btn btn-light btn-sm navBtn" id="homePgBtn">Home</a>
             </li>
         </ul>
     </div>
 </nav>
 
 <!-- ======================================= Body ======================================= -->
-{{!-- <section class="section" id="page"> --}}
-<div class="container" id="page" style="margin-top:100px">
+<div class="container">
     <div class="row">
-        {{#each news}}
+        {{#each saved}}
         <div class="list-group col-lg-5 col-12 m-auto" id="gameCard">
             <a href="{{this.link}}" id="ignLink">
-                <h5>{{this.title}}</h5>
+                <h6>{{this.title}}</h6>
+                <img id="thumb" src="{{this.img}}">
             </a>
-            <img class="thumb" src="{{this.img}}">
-            <br><br><br><br><br>
+            <!-- ====== note button ====== -->
+            <button class="noteBtn btn-info" data-ObjectId="{{this._id}}">
+                <i class="far fa-edit"></i>
+            </button>
+
+            <!-- ====== unSave button ====== -->
             <button class="unSaveBtn btn-success" data-ObjectId="{{this._id}}" data-State="{{this.saved}}">
                 <i class="fas fa-trash-restore-alt"></i>
             </button>
@@ -35,9 +38,47 @@
     </div>
 </div>
 
+<!-- ======================================= note ======================================= -->
+<div class="popUp row">
+    <div class="noteTable mx-auto">
+        <div class="noteHeader">
+            <span class="close btn">x</span>
+        </div>
+        {{!-- right side --}}
+        <div class="noteForm">
+            <div class="newNote"></div>
+            <form>
+                <div class="form-group">
+                    <label for="writeNote">Note</label>
+                    <textarea class="form-control" id="writeNote" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary submitNoteBtn">Submit</button>
+            </form>
+        </div>
+
+        {{!-- left side --}}
+        <ul class="noteList">
+            <!-- ==== note list post here ==== -->
+            <li>asdf</li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, non dolores? Sapiente modi quos, quidem
+                saepe provident alias voluptates ducimus exercitationem ipsa sed molestiae veniam a accusantium error
+                qui nam!
+                <button class="btn delNote"><i class="fas fa-trash"></i></button>
+            </li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus atque sunt nostrum, excepturi
+                obcaecati adipisci optio culpa asperiores maxime quo, voluptates itaque distinctio voluptate
+                consequuntur veniam eligendi enim neque! Quia odio officiis fugiat soluta minus, quisquam optio quasi
+                assumenda aspernatur molestiae temporibus, eligendi dolores numquam. Veniam est recusandae
+                exercitationem eum.</li>
+            <li>asdf</li>
+        </ul>
+    </div>
+</div>
+
 <!-- ======================================= footer ======================================= -->
 <footer>
     <hr>
-    <span>Copyright &copy; 2019 Isaac Wu</span>
-    <span> · Powered by IGN.com</sp>
+    <span>Copyright &copy; 2019 Isaac Wu &nbsp;</span>
+    <i class="fas fa-gamepad"></i>
+    <span>&nbsp; Powered by IGN.com</sp>
 </footer>
