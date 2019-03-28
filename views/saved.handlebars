@@ -47,16 +47,8 @@
         <div class="row" id="row">
             {{!-- left side --}}
             <ul class="noteList col-7">
-                <!-- ==== note list post here ==== -->
-                <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta iste debitis repellendus
-                    voluptates dolorum ipsa magni qui inventore exercitationem modi, eveniet accusantium sequi odio
-                    ex magnam culpa quod rerum. Explicabo?
-                    <button class="btn delNote"><i class="fas fa-trash"></i></button>
-                </li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque magnam odio aspernatur incidunt
-                    enim error, doloremque assumenda quidem esse soluta ducimus adipisci! Voluptatum dolores
-                    perspiciatis illo. Soluta, itaque! Ratione, earum?
-                </li>
+                <!-- ==== all notes show below ==== -->
+
             </ul>
             {{!-- left end --}}
 
@@ -66,9 +58,13 @@
                 <form>
                     <div class="form-group">
                         <label for="writeNote">Note</label>
-                        <textarea class="form-control" id="writeNote" rows="5"></textarea>
+                        <textarea class="form-control" id="writeNote" rows="5">
+                            {{!-- Write Note Here --}}
+                        </textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-sm submitNoteBtn">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-sm submitNoteBtn"
+                        data-ObjectId="{{this._id}}">Submit
+                    </button>
                 </form>
             </div>
             {{!-- right end --}}

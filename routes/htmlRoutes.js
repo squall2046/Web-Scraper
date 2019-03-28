@@ -102,13 +102,12 @@ module.exports = function (app) {
     // =============== get saved data from mongodb news-collection as well ===============
     app.get("/saved", (req, res) => {
         db.New.find({ saved: true }).sort({ date: -1 })
-            .populate("note")
             .then((dbSaved) => {
                 let hbsObject = {
                     saved: dbSaved
                 };
-                res.render("saved", hbsObject);
                 // console.log(hbsObject)
+                res.render("saved", hbsObject);
             })
     });
 
@@ -123,28 +122,38 @@ module.exports = function (app) {
             });
     });
 
-    // =============== click note button on ===============
+    // =============== click note button on saved news ===============
     app.get("/note/:id", (req, res) => {
         db.New.findOne({ _id: req.params.id })
             .populate("note")
-            .then(function (dbNew) {
-                let hbsObject = {
-                    notes: dbSaved
+            .then(function (dbNote) {
+                console.log("dbNote:", dbNote)
+                let theNewsObject = {
+                    theNews: dbNote
                 };
-                res.render("saved", hbsObject);
+                // console.log("noteObject.theNews.note.note:", noteObject.theNews.note.note)
+                res.json(theNewsObject);
             })
             .catch((err) => {
                 res.json(err);
             });
     });
 
-    app.post("/new/:id", (req, res) => {
+    // =============== click submit button on pop-up page ===============
+    app.post("/post/:id", (req, res) => {
         db.Note.create(req.body)
             .then(function (dbNote) {
-                return db.dbNew.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+                return db.New.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
             })
-            .then(function (dbNew) {
-                res.json(dbNew);
+            .then(function (dbNotes) {
+                console.log("==== dbNew",dbNotes)
+                // res.json(dbNew);
+                let theNotesObject = {
+                    theNotes: dbNotes
+                };
+                // res.render("saved", hbsObject);
+                res.json(theNewsObject);
+
             })
             .catch((err) => {
                 res.json(err);
