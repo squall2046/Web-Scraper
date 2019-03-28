@@ -152,7 +152,7 @@ footer {
 
 .noteTable {
   width: 80%;
-  height: 450px;
+  height: 400px;
   margin: 120px 0 80px;
   padding: 0 !important;
   border: 1px solid;
@@ -194,12 +194,6 @@ footer {
   padding: 75px 0 0 20px;
   overflow: auto;
 }
-
-/* .form-group {
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-} */
 
 .noteList li {
   padding: 5px;

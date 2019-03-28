@@ -136,6 +136,18 @@ module.exports = function (app) {
             });
     });
 
+    app.get("/note2/:id", (req, res) => {
+        db.New.findOne({ _id: req.params.id })
+            .populate("note")
+            .then(function (dbNote) {
+                console.log("dbNote:", dbNote)
+                // console.log("noteObject.theNews.note.note:", noteObject.theNews.note.note)
+                res.json(dbNote);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    });
     // =============== click submit button on pop-up page ===============
     app.post("/post/:id", (req, res) => {
         db.Note.create(req.body)
@@ -143,23 +155,33 @@ module.exports = function (app) {
                 console.log("== dbNote", dbNote)
                 return db.New.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id } }, { new: true });
             })
-            .then(function (dbNotes) {
-                console.log("=====", dbNotes)
-                res.json(dbNotes);
+            .then(function (dbNew) {
+                console.log("=====", dbNew)
+                res.json(dbNew);
             })
             .catch((err) => {
                 res.json(err);
             })
     });
 
-        // =============== click delete button on each note ===============
-        app.delete("/delete/:id", (req, res) => {
-            db.Note.findOneAndDelete({ _id: req.params.id })
-                .then(function (dbNote) {
-                    res.end();
-                })
-                .catch((err) => {
-                    res.json(err);
-                })
-        });
+    // =============== click delete button on each note ===============
+    app.delete("/delete/:id", (req, res) => {
+        db.Note.findOneAndDelete({ _id: req.params.id })
+            // db.New.findOneAndDelete({ _id: req.params.id }, { note: req.params.id })
+
+            .then(function (dbNote) {
+                // res.json(dbNote);
+
+                db.New.findOne({ note: req.params.id })
+                    .then(function (dbNew) {
+                        res.json(dbNew);
+                    })
+                    .catch((err) => {
+                        res.json(err);
+                    })
+            })
+            .catch((err) => {
+                res.json(err);
+            })
+    });
 };

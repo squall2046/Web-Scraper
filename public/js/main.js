@@ -65,11 +65,11 @@ $(document).ready(function () {
             url: "/note/" + thisId
         })
             .then(function (data) {
-                console.log(data);
+                // console.log(data);
 
                 if (data.note) {
                     data.note.forEach((eachNote) => {
-                        $(".noteList").prepend('<li class="newLi">' + eachNote.note + '<button class="btn delNoteBtn" data-id="' + eachNote._id + '"><i class="fas fa-trash"></i></button>');
+                        $(".noteList").prepend('<li class="newLi">' + eachNote.note + '<button class="btn btn-sm hvr-icon-rotate delNoteBtn" data-id="' + eachNote._id + '"><i class="fas fa-trash hvr-icon"></i></button>');
                     })
                 }
             })
@@ -89,23 +89,42 @@ $(document).ready(function () {
                 data: { note: writeNote }
             })
                 .then(function (data) {
-                    console.log(data);
                     $("#writeNote").val("");
-                    $(".popUp").fadeOut();
+                    $.ajax({
+                        method: "GET",
+                        url: "/note/" + noteId
+                    })
+                        .then(function (data) {
+                            $(".noteList").empty();
+                            data.note.forEach((eachNote) => {
+                                $(".noteList").prepend('<li class="newLi">' + eachNote.note + '<button class="btn btn-sm hvr-icon-rotate delNoteBtn" data-id="' + eachNote._id + '"><i class="fas fa-trash hvr-icon"></i></button>');
+                            })
+                        })
                 });
         }
     });
+
     // =============== click note-delete button to delete note ===============
     $(document).on("click", ".delNoteBtn", function () {
         let noteId = $(this).attr("data-id");
+
         $.ajax({
             method: "DELETE",
             url: "/delete/" + noteId,
         })
             .then(function (data) {
-                console.log(data);
-                $(".popUp").fadeOut();
+                console.log(data._id)
 
+                $.ajax({
+                    method: "GET",
+                    url: "/note2/" + data._id
+                })
+                    .then(function (data) {
+                        $(".noteList").empty();
+                        data.note.forEach((eachNote) => {
+                            $(".noteList").prepend('<li class="newLi">' + eachNote.note + '<button class="btn btn-sm hvr-icon-rotate delNoteBtn" data-id="' + eachNote._id + '"><i class="fas fa-trash hvr-icon"></i></button>');
+                        })
+                    })
             });
     });
 
@@ -113,6 +132,5 @@ $(document).ready(function () {
     $(document).on("click", ".close", function () {
         $(".popUp").fadeOut();
     });
-
 
 })
