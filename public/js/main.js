@@ -65,11 +65,11 @@ $(document).ready(function () {
             url: "/note/" + thisId
         })
             .then(function (data) {
-                // console.log(data);
+                console.log(data);
 
                 if (data.note) {
                     data.note.forEach((eachNote) => {
-                        $(".noteList").prepend('<li class="newLi">' + eachNote.note + '<button class="btn delNote"><i class="fas fa-trash"></i></button>');
+                        $(".noteList").prepend('<li class="newLi">' + eachNote.note + '<button class="btn delNoteBtn" data-id="' + eachNote._id + '"><i class="fas fa-trash"></i></button>');
                     })
                 }
             })
@@ -79,13 +79,13 @@ $(document).ready(function () {
     $(document).on("click", ".submitNoteBtn", function () {
         event.preventDefault();
         let writeNote = $("#writeNote").val().trim();
-        let newsId = $(this).attr("data-id");
-        // console.log(newsId);
+        let noteId = $(this).attr("data-id");
+        // console.log(noteId);
 
         if (writeNote.length > 0) {
             $.ajax({
                 method: "POST",
-                url: "/post/" + newsId,
+                url: "/post/" + noteId,
                 data: { note: writeNote }
             })
                 .then(function (data) {
@@ -95,25 +95,24 @@ $(document).ready(function () {
                 });
         }
     });
+    // =============== click note-delete button to delete note ===============
+    $(document).on("click", ".delNoteBtn", function () {
+        let noteId = $(this).attr("data-id");
+        $.ajax({
+            method: "DELETE",
+            url: "/delete/" + noteId,
+        })
+            .then(function (data) {
+                console.log(data);
+                $(".popUp").fadeOut();
+
+            });
+    });
 
     // =============== click X to close pop-up page ===============
     $(document).on("click", ".close", function () {
         $(".popUp").fadeOut();
-    })
+    });
 
-    // // =============== click note-submit button to post a new note ===============
-    // $(document).on("click", ".submitNoteBtn", function () {
-    //     event.preventDefault();
-    //     let writeNote = $("#writeNote").val();
-    //     let thisId = $(this).attr("data-ObjectId");
 
-    //     $.ajax({
-    //         method: "POST",
-    //         url: "/post/" + thisId,
-    //         data: writeNote
-    //     })
-    //         .then(function (data) {
-    //             // console.log(data);
-    //         });
-    // });
 })

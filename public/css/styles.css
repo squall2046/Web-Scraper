@@ -215,7 +215,7 @@ footer {
   background: rgba(197, 197, 197);
 }
 
-.delNote {
+.delNoteBtn {
   position: relative;
   float: right;
   padding: 0 5px !important

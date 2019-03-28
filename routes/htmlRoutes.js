@@ -150,7 +150,16 @@ module.exports = function (app) {
             .catch((err) => {
                 res.json(err);
             })
-
     });
 
+        // =============== click delete button on each note ===============
+        app.delete("/delete/:id", (req, res) => {
+            db.Note.findOneAndDelete({ _id: req.params.id })
+                .then(function (dbNote) {
+                    res.end();
+                })
+                .catch((err) => {
+                    res.json(err);
+                })
+        });
 };
