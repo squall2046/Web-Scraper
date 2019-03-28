@@ -54,39 +54,46 @@ $(document).ready(function () {
     // =============== click note button to pop-up page ===============
     $(document).on("click", ".noteBtn", function () {
         $(".popUp").fadeIn();
+        $(".noteList").empty();
 
         let thisId = $(this).attr("data-ObjectId");
+        $(".submitNoteBtn").attr("data-id", thisId);
+        // console.log(thisId);
 
         $.ajax({
             method: "GET",
             url: "/note/" + thisId
         })
             .then(function (data) {
-                $(".noteList").empty();
-                console.log(data.theNews.note.note);
-                data.theNews.note.note.forEach((eachNote) => {
-                    $(".noteList").prepend('<li class="newLi">');
-                    $(".newLi").append(eachNote);
-                    $(".newLi").append('<button class="btn delNote"><i class="fas fa-trash"></i></button>')
-                })
+                // console.log(data);
 
-                // =============== click note-submit button to post a new note ===============
-                $(document).on("click", ".submitNoteBtn", function () {
-                    event.preventDefault();
-                    let writeNote = $("#writeNote").val().trim();
-                    let newsId = data.theNews._id;
-                    console.log(newsId);
-
-                    $.ajax({
-                        method: "POST",
-                        url: "/post/" + newsId,
-                        data: { note: writeNote }
+                if (data.note) {
+                    data.note.forEach((eachNote) => {
+                        $(".noteList").prepend('<li class="newLi">' + eachNote.note + '<button class="btn delNote"><i class="fas fa-trash"></i></button>');
                     })
-                        .then(function (data) {
-                            console.log(data.note);
-                        });
+                }
+            })
+    });
+
+    // =============== click note-submit button to post a new note ===============
+    $(document).on("click", ".submitNoteBtn", function () {
+        event.preventDefault();
+        let writeNote = $("#writeNote").val().trim();
+        let newsId = $(this).attr("data-id");
+        // console.log(newsId);
+
+        if (writeNote.length > 0) {
+            $.ajax({
+                method: "POST",
+                url: "/post/" + newsId,
+                data: { note: writeNote }
+            })
+                .then(function (data) {
+                    console.log(data);
+                    $("#writeNote").val("");
+                    $(".popUp").fadeOut();
                 });
-            });
+        }
     });
 
     // =============== click X to close pop-up page ===============

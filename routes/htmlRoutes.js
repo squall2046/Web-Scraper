@@ -41,7 +41,7 @@ module.exports = function (app) {
             .then((cleared) => {
 
                 // After removed, all left news are saved,
-                // so loop all news we still have and push each of title to titleArray.
+                // so loop all news which we still have and push each of titles to titleArray.
                 var titleArr = [];
                 db.New.find({})
                     .then((dbNew) => {
@@ -66,7 +66,7 @@ module.exports = function (app) {
                                 .attr("data-original");
                             console.log("==== singleTitle:", result.title)
 
-                            // Prevent to create news in mongoDB duplicated
+                            // Prevent to create repeated news in mongoDB
                             if (titleArr.indexOf(result.title) === -1) {
                                 db.New.create(result)
                                     .then((dbNew) => {
@@ -128,11 +128,8 @@ module.exports = function (app) {
             .populate("note")
             .then(function (dbNote) {
                 console.log("dbNote:", dbNote)
-                let theNewsObject = {
-                    theNews: dbNote
-                };
                 // console.log("noteObject.theNews.note.note:", noteObject.theNews.note.note)
-                res.json(theNewsObject);
+                res.json(dbNote);
             })
             .catch((err) => {
                 res.json(err);
@@ -143,21 +140,17 @@ module.exports = function (app) {
     app.post("/post/:id", (req, res) => {
         db.Note.create(req.body)
             .then(function (dbNote) {
-                return db.New.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+                console.log("== dbNote", dbNote)
+                return db.New.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id } }, { new: true });
             })
             .then(function (dbNotes) {
-                console.log("==== dbNew",dbNotes)
-                // res.json(dbNew);
-                let theNotesObject = {
-                    theNotes: dbNotes
-                };
-                // res.render("saved", hbsObject);
-                res.json(theNewsObject);
-
+                console.log("=====", dbNotes)
+                res.json(dbNotes);
             })
             .catch((err) => {
                 res.json(err);
-            });
+            })
+
     });
 
 };
