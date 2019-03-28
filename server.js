@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 
 // MongoDB
 // =============================================================
-mongoose.connect("mongodb://localhost/webScraperDB", { useNewUrlParser: true });
+MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
 
 // Sets up the Express App
 // =============================================================
