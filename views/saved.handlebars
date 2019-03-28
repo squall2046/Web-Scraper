@@ -1,6 +1,6 @@
 <!-- ======================================= Nav ======================================= -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main">
-    <img src="/css/original.gif" class="qr" alt="">
+    <img src="/css/original.gif" class="panda" alt="">
     <a href="/" class="header" style="text-decoration:none">IGN Scraper </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,10 +16,10 @@
 </nav>
 
 <!-- ======================================= Body ======================================= -->
-<div class="container">
+<div class="container newsList">
     <div class="row">
         {{#each saved}}
-        <div class="list-group col-lg-5 col-12 m-auto" id="gameCard">
+        <div class="list-group col-lg-5 col-12 m-auto" id="news">
             <a href="{{this.link}}" id="ignLink">
                 <h6>{{this.title}}</h6>
                 <img id="thumb" src="{{this.img}}">
@@ -39,39 +39,40 @@
 </div>
 
 <!-- ======================================= note ======================================= -->
-<div class="popUp row">
-    <div class="noteTable mx-auto">
+<div class="popUp hidden">
+    <div class="noteTable mx-auto col-lg-7 col-md-9 col-11">
         <div class="noteHeader">
             <span class="close btn">x</span>
         </div>
-        {{!-- right side --}}
-        <div class="noteForm">
-            <div class="newNote"></div>
-            <form>
-                <div class="form-group">
-                    <label for="writeNote">Note</label>
-                    <textarea class="form-control" id="writeNote" rows="5"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary submitNoteBtn">Submit</button>
-            </form>
-        </div>
+        <div class="row" id="row">
+            {{!-- left side --}}
+            <ul class="noteList col-7">
+                <!-- ==== note list post here ==== -->
+                <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta iste debitis repellendus
+                    voluptates dolorum ipsa magni qui inventore exercitationem modi, eveniet accusantium sequi odio
+                    ex magnam culpa quod rerum. Explicabo?
+                    <button class="btn delNote"><i class="fas fa-trash"></i></button>
+                </li>
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque magnam odio aspernatur incidunt
+                    enim error, doloremque assumenda quidem esse soluta ducimus adipisci! Voluptatum dolores
+                    perspiciatis illo. Soluta, itaque! Ratione, earum?
+                </li>
+            </ul>
+            {{!-- left end --}}
 
-        {{!-- left side --}}
-        <ul class="noteList">
-            <!-- ==== note list post here ==== -->
-            <li>asdf</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, non dolores? Sapiente modi quos, quidem
-                saepe provident alias voluptates ducimus exercitationem ipsa sed molestiae veniam a accusantium error
-                qui nam!
-                <button class="btn delNote"><i class="fas fa-trash"></i></button>
-            </li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus atque sunt nostrum, excepturi
-                obcaecati adipisci optio culpa asperiores maxime quo, voluptates itaque distinctio voluptate
-                consequuntur veniam eligendi enim neque! Quia odio officiis fugiat soluta minus, quisquam optio quasi
-                assumenda aspernatur molestiae temporibus, eligendi dolores numquam. Veniam est recusandae
-                exercitationem eum.</li>
-            <li>asdf</li>
-        </ul>
+            {{!-- right side --}}
+            <div class="noteForm col-5">
+                <div class="newNote"></div>
+                <form>
+                    <div class="form-group">
+                        <label for="writeNote">Note</label>
+                        <textarea class="form-control" id="writeNote" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm submitNoteBtn">Submit</button>
+                </form>
+            </div>
+            {{!-- right end --}}
+        </div>
     </div>
 </div>
 
