@@ -133,4 +133,17 @@ $(document).ready(function () {
         $(".popUp").fadeOut();
     });
 
+    // =============== toggle ===============
+    $(".smile").on('click', function () {
+        if ($(this).attr("data-switch") == "off") {
+            $(".list-group").css("background-color", "rgba(255, 255, 255, .9)");
+            $(".news-title").css("color", "rgba(0, 0, 0, .9)");
+            $(this).attr("data-switch", "on");
+        } else {
+            $(".list-group").css("background-color", "rgba(0, 0, 0, .9)");
+            $(".news-title").css("color", "rgba(255, 255, 255, .9)");
+            $(this).attr("data-switch", "off");
+        }
+    })
+
 })
