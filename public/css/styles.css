@@ -3,12 +3,16 @@ body{
   position: relative;
 }
 
-body::after {
+/* body::after { */
+body {
   content: "";
-  background: url('./smash.jpg');
-  background-size: 100% auto;
+  background-image: url('./1.jpg');
+  /* background: black; */
+  /* background-size: 100% auto; */
+  background-attachment: fixed;
+  background-size: 100%;
   background-repeat: repeat;
-  opacity: 0.5;
+  opacity: 0.9;
   position: absolute;
   top: 0;
   left: 0;
