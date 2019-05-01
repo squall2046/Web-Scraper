@@ -24,6 +24,7 @@ An app that allows users to scrape news, images, and many useful information fro
 ## 
 
 ![concert](./public/Snipaste_2019-05-01_17-06-43.png)
+
 Click 💡 to switch Light Theme or Dark Theme
 
 ![concert](./public/Snipaste_2019-05-01_17-06-02.png)
