@@ -1,5 +1,5 @@
 <!-- ======================================= Nav ======================================= -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" id="main">
+<nav class="navbar navbar-expand-lg navbar-light" id="main">
     <img src="/css/original.gif" class="panda" alt="">
     <a href="/" class="header" style="text-decoration:none">IGN Scraper </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -13,6 +13,7 @@
             </li>
         </ul>
     </div>
+    <span class='smile' data-switch='off'>💡</span><img src="/css/s3iCH.gif" class="star" alt="Welcome!!">
 </nav>
 
 <!-- ======================================= Body ======================================= -->
@@ -20,8 +21,8 @@
     <div class="row">
         {{#each saved}}
         <div class="list-group col-lg-5 col-12 m-auto" id="news">
-            <a href="{{this.link}}" id="ignLink">
-                <h6>{{this.title}}</h6>
+            <a href="{{this.link}}" id="ignLink" target="_blank">
+                <div class="news-title">{{this.title}}</div>
                 <img id="thumb" src="{{this.img}}">
             </a>
             <!-- ====== note button ====== -->
