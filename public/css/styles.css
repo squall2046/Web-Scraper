@@ -1,9 +1,10 @@
-body{
-  background:white;
+body {
+  background: white;
   position: relative;
 }
 
 /* body::after { */
+
 body {
   content: "";
   background-image: url('./1.jpg');
@@ -21,49 +22,54 @@ body {
   z-index: -1;
 }
 
-#main{
+#main {
   position: fixed;
   top: 0;
   width: 100%;
   height: 70px;
   /* padding: .8% 8%; */
   z-index: 2;
-  /* background-color: rgb(255, 255, 255, .95); */
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+  background-color: rgb(0, 0, 0, .95);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-
-.home{
+.home {
   margin: 10px 0 3px;
 }
-.header{
+
+.header {
   position: relative;
   float: left;
   font-family: 'Anton', sans-serif;
   font-size: 200%;
-  color: black;
+  color: rgb(255, 255, 255);
 }
-.panda, .star{
+
+.panda, .star {
   position: relative;
   float: left;
   width: 55px;
   height: 55px;
 }
 
-#userImg{
+.navbar-toggler-icon {
+  background-color: rgb(255, 255, 255, .2) !important
+}
+
+#userImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
 
-.navBtn{
+.navBtn {
   position: relative;
   float: right;
   right: 0px;
   margin-top: 5px;
   margin-left: 450px;
   margin-left: 30px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 #savePgBtn, #clearBtn {
@@ -71,6 +77,7 @@ body {
 }
 
 /* ================= News ================= */
+
 .newsList {
   padding: 1% 0;
   height: auto;
@@ -92,9 +99,10 @@ body {
   opacity: .95;
   border-radius: 2px;
 }
+
 #news:hover {
   background-color: rgb(0, 0, 0, .2);
-  background: linear-gradient(150deg, black,black,rgb(255, 255, 255,.5),black,black);
+  background: linear-gradient(150deg, black, black, rgb(255, 255, 255, .5), black, black);
   animation: Gradient 7s ease infinite;
   background-size: 1500% 1500%;
 }
@@ -110,13 +118,13 @@ body {
 
 #thumb {
   position: absolute;
-  width:auto;
+  width: auto;
   height: 63%;
   bottom: 20px;
   border-radius: 10px;
 }
 
-.saveBtn, .unSaveBtn, .noteBtn{
+.saveBtn, .unSaveBtn, .noteBtn {
   position: absolute;
   text-align: center;
   bottom: 8%;
@@ -126,6 +134,7 @@ body {
   padding: 0;
   border-radius: 50%;
 }
+
 .noteBtn {
   bottom: 28%;
 }
@@ -163,11 +172,11 @@ footer {
 
 .noteHeader {
   width: 100%;
-  height:30px;
+  height: 30px;
   border: 1px solid;
   border-radius: 10px 10px 0 0;
   border-color: white;
-  background-color: rgba(0,0,0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .close {
@@ -200,7 +209,7 @@ footer {
   border: 1px solid;
   border-color: rgba(197, 197, 197);
   border-radius: 5px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   overflow: auto;
 }
 
@@ -215,11 +224,11 @@ footer {
 }
 
 .hidden {
-  display:none;
+  display: none;
 }
 
 .unhidden {
-  display:block;
+  display: block;
 }
 
 #row {
@@ -229,13 +238,30 @@ footer {
 .blackbg {
   background-color: black !important;
 }
+
 .whitetxt {
   color: white !important;
 }
 
+.smile {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  z-index: 2;
+}
+
+.smile:hover {
+  cursor: pointer;
+}
 
 @keyframes Gradient {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

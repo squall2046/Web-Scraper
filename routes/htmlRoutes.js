@@ -74,7 +74,7 @@ module.exports = function (app) {
                                 .children("img")
                                 .attr("src")
                                 .split("&crop=").join(",").slice(0);
-                            console.log('===========\n', result.img)
+                            console.log('===========\n', result)
 
                             // Prevent to create repeated news in mongoDB
                             if (titleArr.indexOf(result.title) === -1) {

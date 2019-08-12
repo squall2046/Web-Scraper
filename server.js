@@ -26,7 +26,7 @@ app.set("view engine", "handlebars");
 // Routes
 // =============================================================
 const path = require('path');
-// require(path.join(__dirname, '/routes/apiRoutes.js'))(app);
+require(path.join(__dirname, '/routes/apiRoutes.js'))(app);
 require(path.join(__dirname, '/routes/htmlRoutes.js'))(app);
 
 

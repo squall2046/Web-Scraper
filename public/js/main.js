@@ -140,12 +140,16 @@ $(document).ready(function () {
             $(".news-title").css("color", "rgba(0, 0, 0, .9)");
             $("body").css('background-image', 'url(../../../css/2.jpg)');
             $("body").css('background-attachment', 'fixed');
+            $(".header").css('color', 'rgb(0, 0, 0, .95)')
+            $("#main").css('background-color', 'rgb(255, 255, 255, .95)')
             $(this).attr("data-switch", "on");
         } else {
             $(".list-group").css("background-color", "rgba(0, 0, 0, .9)");
             $(".news-title").css("color", "rgba(255, 255, 255, .9)");
             $("body").css("background", "url(../../../css/1.jpg)");
             $("body").css('background-attachment', 'fixed');
+            $("#main").css('background-color', 'rgb(0, 0, 0, .95)')
+            $(".header").css('color', 'rgb(255, 255, 255, .95)')
             $(this).attr("data-switch", "off");
         }
     })
