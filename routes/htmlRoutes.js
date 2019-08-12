@@ -48,23 +48,33 @@ module.exports = function (app) {
                         dbNew.forEach((eachNew) => {
                             titleArr.push(eachNew.title);
                         })
-                        console.log("==== titleArr:", titleArr)
+                        // console.log("==== titleArr:", titleArr)
                     })
 
                 axios.get("http://www.ign.com/")
                     .then((response) => {
                         let $ = cheerio.load(response.data);
+                        // console.log(response.data)
                         let result = {};
+                        // 如果 $("article .item-body .item-thumbnail a") 不工作,
+                        // 可以尝试使用后面抓取 title 和 img 的方法:
+                        // $(element).children("article").children("xxx").children("xxx")...的方法
+                        // 注意到 ign.com 上去看 html 的每一层 tag 是否完全被引用.
                         $("article .item-body .item-thumbnail a").each(function (i, element) {
-                            result.title = $(this)
-                                .children("img")
-                                .attr("alt");
-                            result.link = $(this)
+                            result.link = "https://www.ign.com/" + $(this)
                                 .attr("href");
-                            result.img = $(this)
+                            result.title = $(this)
+                                .children(".aspect-ratio-container")
+                                .children(".aspect-ratio-child")
                                 .children("img")
-                                .attr("data-original");
-                            console.log("==== singleTitle:", result.title)
+                                .attr("alt")
+                            result.img = $(this)
+                                .children(".aspect-ratio-container")
+                                .children(".aspect-ratio-child")
+                                .children("img")
+                                .attr("src")
+                                .split("&crop=").join(",").slice(0);
+                            console.log('===========\n', result.img)
 
                             // Prevent to create repeated news in mongoDB
                             if (titleArr.indexOf(result.title) === -1) {
